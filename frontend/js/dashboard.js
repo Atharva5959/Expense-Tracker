@@ -1,3 +1,5 @@
+const API_URL = "https://expense-tracker-o3jp.onrender.com";
+
 const token =
 localStorage.getItem("token");
 
@@ -33,8 +35,8 @@ function logout(){
 async function loadDashboard(){
 
     const response =
-    await fetch(
-        "http://127.0.0.1:8000/dashboard",
+await fetch(
+    "https://expense-tracker-o3jp.onrender.com/dashboard",
         {
             headers:{
                 Authorization:
@@ -71,7 +73,7 @@ async function loadRecentExpenses(){
 
     const response =
     await fetch(
-        "http://127.0.0.1:8000/expenses",
+        "https://expense-tracker-o3jp.onrender.com/expenses",
         {
             headers:{
                 Authorization:
@@ -133,7 +135,7 @@ async function deleteExpense(
     }
 
     await fetch(
-        `http://127.0.0.1:8000/expenses/${expenseId}`,
+    "https://expense-tracker-o3jp.onrender.com/expenses",
         {
             method:"DELETE",
 
@@ -156,7 +158,7 @@ async function loadChart(){
 
     const expenseResponse =
     await fetch(
-        "http://127.0.0.1:8000/expenses",
+        "https://expense-tracker-o3jp.onrender.com/expenses",
         {
             headers:{
                 Authorization:
@@ -167,7 +169,7 @@ async function loadChart(){
 
     const categoryResponse =
     await fetch(
-        "http://127.0.0.1:8000/categories",
+        "https://expense-tracker-o3jp.onrender.com/categories",
         {
             headers:{
                 Authorization:
