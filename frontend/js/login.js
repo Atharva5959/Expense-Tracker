@@ -1,7 +1,7 @@
 const API_URL =
 "https://expense-tracker-o3jp.onrender.com";
 
-async function login(){
+async function login() {
 
     const email =
     document.getElementById(
@@ -13,51 +13,66 @@ async function login(){
         "password"
     ).value;
 
-    const response =
-    await fetch(
-        "https://expense-tracker-o3jp.onrender.com/login",
-        {
-            method:"POST",
+    try {
 
-            headers:{
-                "Content-Type":
-                "application/json"
-            },
+        const response =
+        await fetch(
+            `${API_URL}/login`,
+            {
+                method: "POST",
 
-            body:JSON.stringify({
-                email:email,
-                password:password
-            })
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const data =
+        await response.json();
+
+        console.log(data);
+
+        if (response.ok) {
+
+            localStorage.setItem(
+                "token",
+                data.token
+            );
+
+            localStorage.setItem(
+                "userName",
+                data.name
+            );
+
+            alert(
+                "Login Successful"
+            );
+
+            window.location.href =
+            "/dashboard-page";
+
+        } else {
+
+            alert(
+                data.detail ||
+                "Login Failed"
+            );
+
         }
-    );
 
-    const data = await response.json();
+    } catch (error) {
 
-    console.log(data);
-
-    if(response.ok){
-
-        localStorage.setItem(
-            "token",
-            data.token
-        );
-
-        localStorage.setItem(
-            "userName",
-            data.name
-        );
+        console.error(error);
 
         alert(
-            "Login Successful"
+            "Unable to connect to server"
         );
 
-        window.location.href =
-        "dashboard.html";
-    }
-    else{
-
-        alert(
-            data.detail
-        );
     }
 }
