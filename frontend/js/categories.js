@@ -1,3 +1,6 @@
+const API_URL =
+"https://expense-tracker-o3jp.onrender.com";
+
 async function addCategory(){
 
     const token =
@@ -9,7 +12,7 @@ async function addCategory(){
     ).value;
 
     await fetch(
-        "http://127.0.0.1:8000/categories",
+        "https://expense-tracker-o3jp.onrender.com/categories",
         {
             method:"POST",
 
@@ -35,7 +38,7 @@ async function loadCategories(){
 
     const response =
     await fetch(
-        "http://127.0.0.1:8000/categories",
+        "https://expense-tracker-o3jp.onrender.com/categories",
         {
             headers:{
                 Authorization:

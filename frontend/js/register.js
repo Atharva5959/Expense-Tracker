@@ -1,3 +1,6 @@
+const API_URL =
+"https://expense-tracker-o3jp.onrender.com";
+
 async function registerUser(){
 
     const name =

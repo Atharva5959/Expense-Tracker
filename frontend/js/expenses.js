@@ -1,3 +1,6 @@
+const API_URL =
+"https://expense-tracker-o3jp.onrender.com";
+
 const token = localStorage.getItem("token");
 
 if (!token) {
@@ -6,7 +9,7 @@ if (!token) {
 
 async function loadCategories() {
     const response = await fetch(
-        "http://127.0.0.1:8000/categories",
+        "https://expense-tracker-o3jp.onrender.com/categories",
         {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -35,7 +38,7 @@ async function loadCategories() {
 
 async function getCategoryMap() {
     const response = await fetch(
-        "http://127.0.0.1:8000/categories",
+        "https://expense-tracker-o3jp.onrender.com/categories",
         {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -78,7 +81,7 @@ async function addExpense() {
     }
 
     const response = await fetch(
-        "http://127.0.0.1:8000/expenses",
+        "https://expense-tracker-o3jp.onrender.com/expenses",
         {
             method: "POST",
 
@@ -124,7 +127,7 @@ async function deleteExpense(expenseId) {
     }
 
     const response = await fetch(
-        `http://127.0.0.1:8000/expenses/${expenseId}`,
+        `https://expense-tracker-o3jp.onrender.com/expenses/${expenseId}`,
         {
             method: "DELETE",
 

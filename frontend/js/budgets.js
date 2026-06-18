@@ -1,3 +1,6 @@
+const API_URL =
+"https://expense-tracker-o3jp.onrender.com";
+
 const token =
 localStorage.getItem("token");
 
@@ -20,7 +23,7 @@ async function addBudget(){
     ).value;
 
     await fetch(
-        "http://127.0.0.1:8000/budgets",
+        "https://expense-tracker-o3jp.onrender.com/budgets",
         {
             method:"POST",
 
