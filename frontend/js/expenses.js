@@ -1,5 +1,4 @@
-const API_URL =
-"https://expense-tracker-o3jp.onrender.com";
+const API_URL = "https://expense-tracker-o3jp.onrender.com";
 
 const token = localStorage.getItem("token");
 
@@ -8,8 +7,9 @@ if (!token) {
 }
 
 async function loadCategories() {
+
     const response = await fetch(
-        "https://expense-tracker-o3jp.onrender.com/categories",
+        `${API_URL}/categories`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -37,8 +37,9 @@ async function loadCategories() {
 }
 
 async function getCategoryMap() {
+
     const response = await fetch(
-        "https://expense-tracker-o3jp.onrender.com/categories",
+        `${API_URL}/categories`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -58,6 +59,7 @@ async function getCategoryMap() {
 }
 
 async function addExpense() {
+
     const title =
         document.getElementById("title").value;
 
@@ -70,18 +72,13 @@ async function addExpense() {
     const category_id =
         document.getElementById("categoryId").value;
 
-    if (
-        !title ||
-        !amount ||
-        !expense_date ||
-        !category_id
-    ) {
+    if (!title || !amount || !expense_date || !category_id) {
         alert("Please fill all fields");
         return;
     }
 
     const response = await fetch(
-        "https://expense-tracker-o3jp.onrender.com/expenses",
+        `${API_URL}/expenses`,
         {
             method: "POST",
 
@@ -91,15 +88,16 @@ async function addExpense() {
             },
 
             body: JSON.stringify({
-                title: title,
+                title,
                 amount: Number(amount),
-                category_id: category_id,
-                expense_date: expense_date
+                category_id,
+                expense_date
             })
         }
     );
 
     if (response.ok) {
+
         alert("Expense Added");
 
         document.getElementById("title").value = "";
@@ -108,7 +106,9 @@ async function addExpense() {
         document.getElementById("categoryId").value = "";
 
         loadExpenses();
+
     } else {
+
         const error = await response.json();
 
         alert(
@@ -119,6 +119,7 @@ async function addExpense() {
 }
 
 async function deleteExpense(expenseId) {
+
     const confirmDelete =
         confirm("Delete this expense?");
 
@@ -127,7 +128,7 @@ async function deleteExpense(expenseId) {
     }
 
     const response = await fetch(
-        `https://expense-tracker-o3jp.onrender.com/expenses/${expenseId}`,
+        `${API_URL}/expenses/${expenseId}`,
         {
             method: "DELETE",
 
@@ -138,20 +139,24 @@ async function deleteExpense(expenseId) {
     );
 
     if (response.ok) {
+
         alert("Expense Deleted");
 
         loadExpenses();
+
     } else {
+
         alert("Failed to delete expense");
     }
 }
 
 async function loadExpenses() {
+
     const categoryMap =
         await getCategoryMap();
 
     const response = await fetch(
-        "http://127.0.0.1:8000/expenses",
+        `${API_URL}/expenses`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -164,21 +169,17 @@ async function loadExpenses() {
     let html = "";
 
     data.forEach(expense => {
+
         html += `
             <tr>
                 <td>${expense.title}</td>
-
                 <td>₹${expense.amount}</td>
-
                 <td>${expense.expense_date || "-"}</td>
-
                 <td>
                     ${categoryMap[expense.category_id] || "Unknown"}
                 </td>
-
                 <td>
-                    <button
-                        onclick="deleteExpense('${expense.id}')">
+                    <button onclick="deleteExpense('${expense.id}')">
                         Delete
                     </button>
                 </td>
