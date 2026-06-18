@@ -4,4 +4,4 @@ pydantic
 python-dotenv 
 supabase 
 python-jose 
-passlib[bcrypt]
+passlib[bcrypt] 

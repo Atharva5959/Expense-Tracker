@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div class="sidebar">
+
+        <h2>Finance Tracker</h2>
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="categories.html">Categories</a>
+
+        <a href="expenses.html">Expenses</a>
+
+        <a href="budgets.html">Budgets</a>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <div class="content">
+
+        <h1 id="welcomeText">
+            Dashboard
+        </h1>
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <h3>Total Expense</h3>
+
+                <h2 id="totalExpense">
+                    ₹0
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Total Budget</h3>
+
+                <h2 id="totalBudget">
+                    ₹0
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Remaining Budget</h3>
+
+                <h2 id="remainingBudget">
+                    ₹0
+                </h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Categories</h3>
+
+                <h2 id="totalCategories">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="chart-container">
+
+            <h2>Expense Distribution</h2>
+
+            <canvas id="expenseChart"></canvas>
+
+        </div>
+
+        <div class="recent-expenses">
+
+            <h2>Recent Expenses</h2>
+
+            <table width="100%">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+
+                        <th>Amount</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="recentExpenses">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

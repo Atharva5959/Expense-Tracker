@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Expenses</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Expenses</h1>
+
+    <input
+        type="text"
+        id="title"
+        placeholder="Expense Title">
+
+    <input
+        type="number"
+        id="amount"
+        placeholder="Amount">
+
+    <input
+        type="date"
+        id="expenseDate">
+
+    <select id="categoryId">
+        <option value="">
+            Select Category
+        </option>
+    </select>
+
+    <button onclick="addExpense()">
+        Add Expense
+    </button>
+
+    <hr>
+
+    <h2>Expense List</h2>
+
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+
+        <tbody id="expenseTable">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script src="js/expenses.js"></script>
+
+</body>
+
+</html>

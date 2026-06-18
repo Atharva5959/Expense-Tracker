@@ -32,6 +32,7 @@ class ExpenseCreate(BaseModel):
     title: str
     amount: float
     category_id: str
+    expense_date: str
 
 
 class ExpenseUpdate(BaseModel):

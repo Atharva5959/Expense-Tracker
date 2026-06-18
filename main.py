@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi import Depends
-
+from fastapi.middleware.cors import CORSMiddleware
 from database import supabase
+import token
 
 from security import (
     hash_password,
@@ -17,6 +18,18 @@ from auth import (
 from schemas import *
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+def home():
+    return {"message": "Personal Finance Tracker API Running"}
 
 
 @app.post("/register")
@@ -80,13 +93,15 @@ def login(user: LoginUser):
             detail="Wrong Password"
         )
 
+
     token = create_token({
         "user_id": db_user["id"]
     })
 
     return {
         "message": "Login Successful",
-        "token": token
+        "token": token,
+        "name": db_user["name"]
     }
 
 
@@ -133,6 +148,7 @@ def create_expense(
         "title": expense.title,
         "amount": expense.amount,
         "category_id": expense.category_id,
+        "expense_date": expense.expense_date,
         "user_id": user_id
     }).execute()
 
@@ -288,4 +304,59 @@ def total_expense(
 
     return {
         "total_expense": total
+    }
+
+@app.get("/dashboard")
+def dashboard_stats(
+    user_id=Depends(get_current_user)
+):
+
+    expenses = supabase.table(
+        "expenses"
+    ).select("*").eq(
+        "user_id",
+        user_id
+    ).execute()
+
+    budgets = supabase.table(
+        "budgets"
+    ).select("*").eq(
+        "user_id",
+        user_id
+    ).execute()
+
+    categories = supabase.table(
+        "categories"
+    ).select("*").eq(
+        "user_id",
+        user_id
+    ).execute()
+
+    total_expense = sum(
+        expense["amount"]
+        for expense in expenses.data
+    )
+
+    total_budget = sum(
+        budget["amount"]
+        for budget in budgets.data
+    )
+
+    return {
+
+        "total_expense":
+        total_expense,
+
+        "total_budget":
+        total_budget,
+
+        "remaining_budget":
+        total_budget -
+        total_expense,
+
+        "total_categories":
+        len(categories.data),
+
+        "total_expense_entries":
+        len(expenses.data)
     }
