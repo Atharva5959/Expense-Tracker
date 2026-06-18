@@ -1,7 +1,7 @@
 const API_URL =
 "https://expense-tracker-o3jp.onrender.com";
 
-async function registerUser(){
+async function registerUser() {
 
     const name =
     document.getElementById(
@@ -20,19 +20,19 @@ async function registerUser(){
 
     const response =
     await fetch(
-        "https://expense-tracker-o3jp.onrender.com/register",
+        `${API_URL}/register`,
         {
-            method:"POST",
+            method: "POST",
 
-            headers:{
+            headers: {
                 "Content-Type":
                 "application/json"
             },
 
-            body:JSON.stringify({
-                name:name,
-                email:email,
-                password:password
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password
             })
         }
     );
@@ -43,5 +43,5 @@ async function registerUser(){
     alert(data.message);
 
     window.location.href =
-    "index.html";
+    "/";
 }
