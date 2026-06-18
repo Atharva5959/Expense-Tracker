@@ -43,5 +43,5 @@ async function registerUser(){
     alert(data.message);
 
     window.location.href =
-    "login.html";
+    "index.html";
 }

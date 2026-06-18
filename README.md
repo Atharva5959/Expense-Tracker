@@ -44,7 +44,7 @@ Personal-finance/
 ├── schemas.py
 
 ├── frontend/
-│   ├── login.html
+│   ├── index.html
 │   ├── register.html
 │   ├── dashboard.html
 │   ├── categories.html

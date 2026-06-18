@@ -3,7 +3,7 @@ const API_URL = "https://expense-tracker-o3jp.onrender.com";
 const token = localStorage.getItem("token");
 
 if (!token) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 async function loadCategories() {
