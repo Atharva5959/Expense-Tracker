@@ -17,7 +17,7 @@ async function registerUser(){
 
     const response =
     await fetch(
-        "http://127.0.0.1:8000/register",
+        "https://expense-tracker-o3jp.onrender.com/register",
         {
             method:"POST",
 
